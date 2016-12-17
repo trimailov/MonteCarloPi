@@ -11,6 +11,7 @@ var h = 400,
 var vis = d3.select("svg");
 var piResult = d3.select("#pi-result");
 var count = d3.select("#cycle");
+var accuracy = d3.select("#accuracy");
 
 var svg = document.getElementsByTagName("svg")[0];
 
@@ -45,8 +46,10 @@ var showPi = function() {
 
   var cycle = inCircle + outCircle;
   var pi = ((inCircle / cycle) * 4);
-  piResult.text(pi.toFixed(6));
-  count.text(cycle);
+  var error = Math.abs(1 - (Math.PI / pi)) * 100;
+  piResult.text("Pi: " + pi.toFixed(6));
+  count.text("Cycle: " + cycle);
+  accuracy.text("Error: " + error.toFixed(6) + "%");
 
   if (cycle >= cycles) {
     clearInterval(interval);
